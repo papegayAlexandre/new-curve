@@ -21,9 +21,7 @@ public class CurveGame extends BasicGame {
 
 	@Override
 	public void init(GameContainer container) throws SlickException {
-		Rectangle simpleMap = new Rectangle(0, 0, 800, 600);
-		
-		//TODO: Replace with proper player menu
+		// TODO: Replace with proper player menu
 		players.add(new Player("Gregor", Color.blue));
 		for (int i = 0; i < players.size(); i++) {
 			players.get(i);
@@ -33,18 +31,22 @@ public class CurveGame extends BasicGame {
 	@Override
 	public void update(GameContainer container, int delta)
 			throws SlickException {
-		
+
 	}
+
 	@Override
-	public void render(GameContainer arg0, Graphics arg1) throws SlickException {
-		
+	public void render(GameContainer arg0, Graphics g) throws SlickException {
+		Rectangle simpleMap = new Rectangle(0, 0, 800, 600);
+		Rectangle simpleMap2 = new Rectangle(25, 25, 750, 550);
+		g.setColor(Color.red);
+		g.fill(simpleMap);
+		g.setColor(Color.black);
+		g.fill(simpleMap2);
 	}
-
-
 
 	/**
 	 * @param args
-	 * @throws SlickException 
+	 * @throws SlickException
 	 */
 	public static void main(String[] args) throws SlickException {
 		AppGameContainer game = new AppGameContainer(new CurveGame());

@@ -1,5 +1,8 @@
 package models;
 
+import java.awt.Point;
+import java.util.ArrayList;
+
 import org.newdawn.slick.Color;
 
 public class Player {
@@ -8,6 +11,8 @@ public class Player {
 	private Color color;
 	private int x;
 	private int y;
+	
+	private ArrayList<Point> trail; 
 	
 	public Player(String name, Color color) {
 		setName(name);
