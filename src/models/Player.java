@@ -13,14 +13,17 @@ public class Player {
 	private int y;
 	/** int between 0 and 360 (degrees) */
 	private int orientation;
-	
-	private int speed;
+
+	private double speed = 0.5;
 
 	private ArrayList<Point> trail;
 
-	public Player(String name, Color color) {
+	public Player(String name, Color color, Point pos, int orientation) {
 		setName(name);
 		setColor(color);
+		setX(pos.x);
+		setY(pos.y);
+		setOrientation(orientation);
 	}
 
 	public void move(int delta) {
@@ -38,8 +41,16 @@ public class Player {
 			xThrust = orientation - 360;
 			yThrust = orientation - 270;
 		}
-		setX(Math.round(xThrust * speed * delta / 1000f));
-		setY(Math.round(yThrust * speed * delta / 1000f));
+		setX((int) Math.round(xThrust * speed * delta / 1000f));
+		setY((int) Math.round(yThrust * speed * delta / 1000f));
+	}
+
+	public String toString() {
+		StringBuilder sb = new StringBuilder(10);
+		sb.append(getName()).append(" (").append(getColor()).append("): ")
+				.append(getX()).append("/").append(getY()).append(" => ")
+				.append(getOrientation());
+		return sb.toString();
 	}
 
 	public String getName() {

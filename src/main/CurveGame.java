@@ -3,6 +3,7 @@ package main;
 import java.util.ArrayList;
 import org.newdawn.slick.Color;
 
+import models.Map;
 import models.Player;
 
 import org.newdawn.slick.AppGameContainer;
@@ -15,8 +16,8 @@ import org.newdawn.slick.geom.Rectangle;
 import views.PlayingField;
 
 public class CurveGame extends BasicGame {
-	private ArrayList<Player> players = new ArrayList<Player>();
 	private PlayingField pField;
+	private Map map;
 
 	public CurveGame() {
 		super("NewCurve");
@@ -24,19 +25,17 @@ public class CurveGame extends BasicGame {
 
 	@Override
 	public void init(GameContainer container) throws SlickException {
-		// TODO: Replace with proper player menu
-		players.add(new Player("Gregor", Color.blue));
-		for (int i = 0; i < players.size(); i++) {
-			players.get(i);
-		}
 		//TODO: Replace with proper map loading
-		pField = new PlayingField();
+		pField = new PlayingField(map);
+		
+		map = new Map(800, 600);
+		map.loadPlayers();
 	}
 
 	@Override
 	public void update(GameContainer container, int delta)
 			throws SlickException {
-
+		map.movePlayers(delta);
 	}
 
 	@Override
