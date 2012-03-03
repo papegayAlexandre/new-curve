@@ -11,7 +11,6 @@ public class Map {
 	private int height;
 	private ArrayList<Player> players;
 
-	
 	public Map(int width, int height) {
 		this.width = width;
 		this.height = height;
@@ -19,10 +18,10 @@ public class Map {
 
 	public void loadPlayers() {
 		players = new ArrayList<Player>();
-		players.add(new Player("Gregor", Color.blue, getSafePos(), 30));
-		players.add(new Player("Furfm", Color.green, getSafePos(), 40));
+		players.add(new Player("Gregor", Color.blue, getSafePos(), 0));
+		players.add(new Player("Furfm", Color.green, getSafePos(), 230));
 	}
-	
+
 	public void movePlayers(int delta) {
 		for (int i = 0; i < players.size(); i++) {
 			players.get(i).move(delta);
@@ -30,20 +29,22 @@ public class Map {
 	}
 
 	public Point getSafePos() {
-		int x = (int) Math.round(Math.random() * width); 
+		int x = (int) Math.round(Math.random() * width);
 		int y = (int) Math.round(Math.random() * height);
+		Player p;
 		for (int i = 0; i < players.size(); i++) {
-			if (players.get(i).getX() == x && players.get(i).getY() == y) {
-				x = (int) Math.round(Math.random() * width); 
+			p = players.get(i);
+			while (p.getX() == x && p.getY() == y) {
+				x = (int) Math.round(Math.random() * width);
 				y = (int) Math.round(Math.random() * height);
 				i = 0;
 			}
 		}
 		return new Point(x, y);
 	}
-	
+
 	public ArrayList<Player> getPlayers() {
 		return players;
 	}
-	
+
 }

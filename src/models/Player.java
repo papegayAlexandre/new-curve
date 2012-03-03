@@ -14,9 +14,9 @@ public class Player {
 	/** int between 0 and 360 (degrees) */
 	private int orientation;
 
-	private double speed = 0.5;
+	private double speed = 1.5;
 
-	private ArrayList<Point> trail;
+	private ArrayList<Point> trail = new ArrayList<Point>();
 
 	public Player(String name, Color color, Point pos, int orientation) {
 		setName(name);
@@ -28,9 +28,12 @@ public class Player {
 
 	public void move(int delta) {
 		int xThrust = 0, yThrust = 0;
+
+		trail.add(new Point(getX(), getY()));
+
 		if (orientation <= 90) {
-			xThrust = orientation;
-			yThrust = 90 - orientation;
+			xThrust = 90 - orientation;
+			yThrust = orientation;
 		} else if (orientation <= 180) {
 			xThrust = 180 - orientation;
 			yThrust = 90 - orientation;
@@ -41,8 +44,8 @@ public class Player {
 			xThrust = orientation - 360;
 			yThrust = orientation - 270;
 		}
-		setX((int) Math.round(xThrust * speed * delta / 1000f));
-		setY((int) Math.round(yThrust * speed * delta / 1000f));
+		setX((int) Math.round(getX() + (xThrust * speed * delta / 1000f)));
+		setY((int) Math.round(getY() + (yThrust * speed * delta / 1000f)));
 	}
 
 	public String toString() {
@@ -95,6 +98,10 @@ public class Player {
 					: orientation - 360;
 		}
 		this.orientation = orientation;
+	}
+
+	public ArrayList<Point> getTrail() {
+		return trail;
 	}
 
 }

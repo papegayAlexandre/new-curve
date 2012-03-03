@@ -1,18 +1,14 @@
 package main;
 
-import java.util.ArrayList;
-import org.newdawn.slick.Color;
-
 import models.Map;
-import models.Player;
-
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.BasicGame;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
-import org.newdawn.slick.geom.Rectangle;
 
+import controllers.GameController;
 import views.PlayingField;
 
 public class CurveGame extends BasicGame {
@@ -26,10 +22,11 @@ public class CurveGame extends BasicGame {
 	@Override
 	public void init(GameContainer container) throws SlickException {
 		//TODO: Replace with proper map loading
-		pField = new PlayingField(map);
-		
 		map = new Map(800, 600);
 		map.loadPlayers();
+		pField = new PlayingField(map);
+		GameController gc = new GameController(map.getPlayers());
+		container.getInput().addPrimaryListener(gc);
 	}
 
 	@Override
